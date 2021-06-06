@@ -142,7 +142,6 @@ class Blockchain {
           new Date().getTime().toString().slice(0, -3)
         );
         const timeElapsed = currentTime - timeFromMessage;
-        console.log(timeElapsed);
         if (timeElapsed > fiveSeconds) {
           throw new Error("More than 5 minutes has elapsed");
         }
