@@ -234,8 +234,10 @@ class Blockchain {
     let self = this;
     let errorLog = [];
     return new Promise(async (resolve, reject) => {
-      self.chain.forEach((block, index, arr) => {
-        if (block.validate() === false) {
+      self.chain.forEach(async (block, index, arr) => {
+        //AWAIT VALIDATION
+        const isValidBlock = await block.validate();
+        if (!isValidBlock) {
           errorLog.push(new Error("Block validation failed"));
         }
         if (index > 0 && block.previousBlockHash !== arr[index - 1].hash) {
