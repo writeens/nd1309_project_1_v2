@@ -136,12 +136,14 @@ class Blockchain {
     let self = this;
     return new Promise(async (resolve, reject) => {
       try {
+        const fiveSeconds = 300;
         const timeFromMessage = parseInt(message.split(":")[1]);
         const currentTime = parseInt(
           new Date().getTime().toString().slice(0, -3)
         );
         const timeElapsed = currentTime - timeFromMessage;
-        if (timeElapsed > 300000) {
+        console.log(timeElapsed);
+        if (timeElapsed > fiveSeconds) {
           throw new Error("More than 5 minutes has elapsed");
         }
         const isVerified = bitcoinMessage.verify(message, address, signature);
